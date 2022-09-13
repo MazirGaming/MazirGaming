@@ -1,0 +1,63 @@
+<div class="container">
+    <div class="mt-4">
+    <h2>Thêm mới sản phẩm</h2>
+    <form method="POST" action="/admin/store">
+        <div class="form-group">
+            <label for="name">Tên sản phẩm</label>
+            <input type="text" class="form-control" id="name" name="name">
+        </div>
+        <div class="form-group">
+            <label for="price">Giá</label>
+            <input type="text" class="form-control" id="price" name="price">
+        </div>
+        <div class="form-group">
+            <label for="image">Hình ảnh</label>
+            <input type="text" class="form-control" id="image" name="image">
+        </div>
+        <div class="form-group">
+            <label for="image2">Hình ảnh 2</label>
+            <input type="text" class="form-control" id="image2" name="image2">
+        </div>
+        <div class="form-group">
+            <label for="describle">Mô tả sản phẩm</label>
+            <input type="text" class="form-control" id="describle" name="describle">
+        </div>
+        <div class="form-group mt-4">
+            <label for="discount">Giảm giá (%)</label>
+            <input type="text" class="form-control" id="discount" name="discount">
+        </div>
+        <div class="form-group mt-4">
+            <label for="discount">Số lượng sản phẩm</label>
+            <input type="text" class="form-control" id="qty" name="qty">
+        </div>
+            
+        
+
+        {{!-- <div class="form-group">
+            <label for="details">Nhập lại ID</label>
+            <input type="text" class="form-control" id="details" name="details" value="{{details._id}}">
+        </div> --}}
+        <div class="form-group mt-4">
+            <label for="color">Màu sắc</label>
+            <input type="text" class="form-control" id="color" name="color">
+        </div>
+        Thể loại <select name="category" id="category">
+            {{#each category}}
+                <option value="{{this.slug}}">{{this.title}}</option>
+            {{/each}}
+        </select>
+        <div class="form-group mt-4">
+            <label for="material">Chất liệu</label>
+            <input type="text" class="form-control" id="material" name="material">
+        </div>
+
+        <div class="form-group">
+            <label for="size">Kích thước</label>
+            <input type="text" class="form-control" id="size" name="size">
+        </div>      
+        
+        
+        <button type="submit" class="btn btn-primary">Thêm sản phẩm</button>
+    </form>
+</div>
+</div>

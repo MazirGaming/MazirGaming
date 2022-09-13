@@ -1,0 +1,55 @@
+<div class="mt-4">
+    <h2>Chỉnh sửa sản phẩm</h2>
+    <form method="POST" action="/admin/{{gifts._id}}?_method=PUT">
+        <div class="form-group">
+            <label for="name">Tên sản phẩm</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{gifts.name}}">
+        </div>
+        <div class="form-group">
+            <label for="price">Giá</label>
+            <input type="text" class="form-control" id="price" name="price" value="{{gifts.price}}">
+        </div>
+        <div class="form-group">
+            <label for="image">Hình ảnh</label>
+            <input type="text" class="form-control" id="image" name="image" value="{{gifts.image}}">
+        </div>
+        <div class="form-group">
+            <label for="describle">Mô tả sản phẩm</label>
+            <textarea class="form-control" id="describle" name="describle">{{gifts.describle}}</textarea>
+        </div>
+        <div class="form-group">
+            <input type="hidden" class="form-control" id="details" name="details" value="{{gifts.details.[0]._id}}">
+        </div>
+        {{#each gifts.details}}
+        <div class="form-group mt-4">
+            <label for="color">Màu sắc</label>
+            <input type="text" class="form-control" id="color" name="color" value="{{this.color}}">
+        </div>
+        <div class="form-group mt-4">
+            <label for="material">Chất liệu</label>
+            <input type="text" class="form-control" id="material" name="material" value="{{this.material}}">
+        </div>
+
+        <div class="form-group">
+            <label for="size">Kích thước</label>
+            <input type="text" class="form-control" id="size" name="size" value="{{this.size}}">
+        </div>
+        {{/each}}
+        <div class="type-category">
+            <div>
+                Thể loại hiện tại của sản phẩm: {{gifts.category}}
+            </div>
+                <div class="form-group">
+
+                    Thay đổi thành: <select name="category" id="category">
+                        {{#each category}}
+                        <option value="{{this.slug}}">{{this.title}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+        </div>
+
+
+        <button type="submit" class="btn btn-primary mt-4">Lưu lại</button>
+    </form>
+</div>

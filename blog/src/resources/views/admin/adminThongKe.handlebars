@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="mt-4">
+        <h2>Thống kê doanh thu</h2>
+
+        <form method="POST" action="/admin/thongke">
+            <div style="width: 300px">
+                <div class="form-group">
+                    <label for="date">Từ ngày</label>
+                    <input type="date" class="form-control" id="date1" name="date1" required>
+                </div>
+                <div class="form-group">
+                    <label for="date">Tới ngày</label>
+                    <input type="date" class="form-control" id="date2" name="date2" required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Xem</button>
+            
+        </form>
+        {{#if data}}
+            <div class="totalThongKe">
+                Tổng doanh thu từ ngày : 
+                <h4>{{date1Str}}</h4> tới ngày 
+                <h4>{{date2Str}}</h4>
+                {{!-- <h4 style="color: red;">{{totalThongKe}}.000 vnđ</h4> --}}
+                {{#if (zero totalThongKe)}}
+                <h4 style="color: red;">Không có doanh thu</h4>
+                {{else}}
+                <h4 style="color: red;">{{totalThongKe}}.000 vnđ</h4>
+                {{/if}}
+            </div>
+            {{/if}}
+    </div>
+</div>

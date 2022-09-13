@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="mt-4">
+        {{#if mess}}
+        <div class="alert alert-warning" role="alert">
+            <p>{{mess}}</p>
+        </div>
+        {{/if}}
+        <a href="/admin/category">Trở lại</a>
+    <h2>Thêm mới danh mục sản phẩm</h2>
+    <form method="POST" action="/admin/category/add">
+        <div class="form-group">
+            <label for="name">Tên danh mục sản phẩm</label>
+            <input type="text" class="form-control" id="title" name="title">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Thêm danh mục</button>
+    </form>
+</div>
+</div>

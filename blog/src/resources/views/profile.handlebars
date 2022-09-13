@@ -1,0 +1,86 @@
+<div class="container ">
+  <div class="row mt-4 profile" style="min-height: 530px;">
+    <div class="col-md-8 col-md-offset-2">
+      <h2>Danh sách đơn hàng đã mua</h2>
+      <h6 style="color: red;">Chú ý: Nếu có yêu cầu hủy Đơn Hàng. Quý khách vui lòng liên hệ cho Cửa Hàng trước khi sản phẩm được giao để nhận được sự hỗ trợ tốt nhất! Xin cảm ơn!</h6>
+      {{#if orders}}
+      {{#each orders}}
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Tên sản phẩm</th>
+            <th scope="col">Giá</th>
+            <th scope="col">Số lượng</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each this.items}}
+          <tr>
+            <td>{{this.item.name}}</td>
+            <td>{{this.price}}.000 vnđ</td>
+            <td class="Details1">{{this.qty}}</td>
+          </tr>
+          {{/each}}
+
+          {{!-- {{this.name}}
+          {{this.phone}}
+          {{this.address}} --}}
+
+          <div style="border-bottom: 3px solid red;"></div>
+        </tbody>
+      </table>
+      <div>
+        <h6>Họ & tên người nhận: {{this.name}}</h6>
+        <h6>SĐT người nhận: {{this.phone}}</h6>
+        <h6>Địa chỉ người nhận: {{this.address}}</h6>
+      </div>
+      <div>
+        <h4>Tổng tiền đơn hàng lần {{sum @index 1}}: {{this.cart.totalPrice}}.000 vnđ</h4>
+      </div>
+      <h5 class="createdAt">Thời gian đặt hàng: {{this.createdAt}}</h5>
+      <h5 class="shiped">Tình trạng đơn hàng : {{this.status}}</h5>
+
+      {{#if (handlex this.status)}}
+        <form class="check" action="profile/{{this._id}}" method="post">
+        <div class="form-group">
+          <input type="hidden" class="form-control" id="status" name="status" value="Đã Giao Hàng" >
+        </div>
+        <button style="margin-bottom: 12px;" type="submit click" data-id="{{this._id}}" data-toggle="modal" data-target="#deleteItem">Đã nhận hàng thành công.</button>
+      </form>
+      {{/if}}
+      
+
+      {{#if (exits this.status)}}
+      <h5 class="createdAt">Giao hàng thành công: {{this.updatedAt}}</h5>
+      {{/if}}
+      {{/each}}
+      {{else}}
+      <div class="cart-emty">
+        <h3>Bạn chưa từng mua sản phẩm!</h3>
+      </div>
+      {{/if}}
+
+    </div>
+  </div>
+
+
+
+
+<script>
+  
+  var a = document.getElementsByClassName("check")
+  
+  for (var i=0; i<a.length; i++){
+  
+  
+  a[i].addEventListener("click", function(event){
+    let confirm = window.confirm("Bạn chắc chắn đã nhận hàng thành công?")
+      if (confirm) {
+        alert("Đã nhận hàng thành công")
+      } else {
+        event.preventDefault()
+
+      }
+  })
+    }
+</script>

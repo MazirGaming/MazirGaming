@@ -1,0 +1,10 @@
+<div class="mt-4">
+    <h2>Chỉnh sửa sản phẩm</h2>
+    <form method="POST" action="/admin/category/{{categoryE._id}}?_method=PUT">
+        <div class="form-group">
+            <label for="title">Tên danh mục sản phẩm</label>
+            <input type="text" class="form-control" id="title" name="title" value="{{categoryE.title}}">
+        </div>
+        <button type="submit" class="btn btn-primary mt-4">Lưu lại</button>
+    </form>
+</div>

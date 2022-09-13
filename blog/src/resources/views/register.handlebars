@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="mt-4">
+        <div class="row" style="min-height:530px;">
+            <div class="col-6">
+                {{#if hasErrors}}
+            <div class="alert alert-warning" role="alert">
+            {{#each messages}}
+                <p>{{this}}</p>
+            {{/each}}
+        </div>
+        {{/if}}
+        {{#if mess}}
+        <div class="alert alert-warning" role="alert">
+            <p>{{mess}}</p>
+        </div>
+        {{/if}}
+        <h2>Đăng ký tài khoản</h2>
+        <form method="POST" action="/user/register">
+            <div class="form-group">
+                <label for="username">Tên đăng ký</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Mật khẩu</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            {{!-- <input type="hidden" name="_csrf" value="{{csrfToken}}"> --}}
+            <button type="submit" class="btn btn-primary">Đăng ký</button>
+            Nếu đã có tài khoản! Hãy tới trang <a href="http://localhost:3000/user/login">Đăng Nhập</a>
+        </form>
+            </div>
+        </div>
+        
+    </div>
+</div>

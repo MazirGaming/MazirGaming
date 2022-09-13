@@ -1,0 +1,78 @@
+<div class="mt-4" style="min-height: 530px;">
+  <div class="home-filter">
+    <span class="home-filter__label">Sắp xếp theo</span>
+    {{!-- <a class="home-filter-btn btn">Phổ Biến</a> --}}
+    <a href="/?sort=createAt" class="home-filter-btn btn btn--primary createAt">Mới Nhất</a>
+    {{!-- <button class="home-filter-btn btn">Bán Chạy</button> --}}
+    <div class="select-input">
+      <span class="select-input__label">Giá</span>
+      <i class="select-input__icon fas fa-chevron-down"></i>
+      <ul class="select-input__list">
+        <li class="select-input__item">
+          <a href="/?sort=price" class="select-input__link">Giá: Thấp đến Cao</a>
+        </li>
+        <li class="select-input__item">
+          <a href="/?sort=-price" class="select-input__link">Giá: Cao đến Thấp</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row mt-4">
+    {{#each data}}
+    <div class="col-3">
+      <div class="card mt-4">
+        <a class="gift-slug" href="/gifts/{{this.slug}}">
+          <img class="card-img-top" src="{{this.image}}" alt="Card image cap">
+          <h5 class="gift-name" class="card-title">{{this.name}}</h5>
+        </a>
+        <h4 class="gift-price">{{this.price}} đ</h4>
+        {{!-- <p>{{this._id}}</p> --}}
+        <a class="cart-add" href="/cart/add/{{this._id}}">Thêm vào giỏ hàng</a>
+        <form action="/cart/add/{{this.slug}}" method="post">
+          <input type="hidden" name="_id" value="{{this._id}}">
+          {{!-- <button type="submit" class="btn btn-primary add-cart">Add to Cart</button> --}}
+        </form>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+  <div class="mt-4"></div>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      {{!-- <li class="page-item"><a class="page-link" href="#">Previous</a></li> --}}
+      {{!-- <li class="page-item"><a class="page-link" href="#">{{totalPage}}</a></li> --}}
+      {{!-- <li class="page-item"><a class="page-link" href="#">Next</a></li> --}}
+    </ul>
+  </nav>
+</div>
+{{#if mess}}
+<div class="alert alert-warning" role="alert">
+  <p>{{mess}}</p>
+</div>
+{{/if}}
+<script>
+  var ulElement = document.querySelector('.pagination')
+  var liElements = document.querySelectorAll('.page-item')
+  var html = ''
+
+  for (var i = 1; i <= {{ totalPage }}; i++) {
+    ulElement.innerHTML = '<li class="page-item"><a class="page-link" href="?page=' + i + '">' + i + '</a></li>';
+    html += ulElement.innerHTML
+  }
+  ulElement.innerHTML = html
+
+
+
+      addEventListener('DOMContentLoaded', function () {
+      var liElements = document.querySelectorAll('.page-item')
+      var aElements = document.querySelectorAll('.page-link')
+      console.log($('.page-link'))
+      $('button').on('click', function(){
+        $('button').removeClass('active');
+        $(this).addClass('active')
+      })
+      }) 
+
+
+
+</script>

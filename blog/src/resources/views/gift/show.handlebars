@@ -1,0 +1,195 @@
+<div class="mt-4">
+    <div class="container">
+        <div class="row">
+
+            
+            {{!-- <divclass="col-sm-4">
+  <img class="mySlides" src="{{gift.image}}">
+  {{!-- <img class="mySlides" src="{{gift.image2}}"> --}}
+{{!-- </div> --}}
+
+            <div class="col-sm-4">
+                <img style="border-radius: 5px" width="100%" src="{{gift.image}}" alt="{{gift.slug}}">
+                {{!-- <img style="border-radius: 5px" width="100%" src="{{gift.image2}}"> --}}
+            </div>
+            <div class="col-sm-4">
+                <div>
+                    <h2>{{gift.name}}</h2>
+                    <h2 style="color: red;">{{gift.price}} đ</h2>
+                    <p>{{gift.describle}}</p>
+                </div>
+
+                <a href="/cart/add/{{gift._id}}">
+                    <button class="add-to-cart" style="width: 100%; background-color: #343a40; color: white">
+                        MUA NGAY <br>
+                        (Giao hàng tận nơi - Giá tốt - An toàn)
+                    </button>
+                </a>
+
+            </div>
+            <div class="col-sm-4">
+                <h2>Thời Gian Giao Hàng</h2>
+                <p>- Trong ngày tại: Hà Nội</p>
+                <p>- Khu vực khác: 2-5 ngày</p>
+            </div>
+            <table class="table mt-4">
+                <thead>
+                    <tr>
+                        <th scope="col">Tên sản phẩm</th>
+                        <th scope="col">Màu sắc</th>
+                        <th scope="col">Chất liệu</th>
+                        <th scope="col">Kích thước</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{gift.name}}</td>
+                        {{#each gift.details}}
+                        <td>
+                            <p class="">{{this.color}}</p>
+                        </td>
+                        <td>
+                            <p class="">{{this.material}}</p>
+                        </td>
+                        <td>
+                            <p class="details">{{this.size}}</p>
+                        </td>
+                    </tr>
+                    {{/each}}
+
+                </tbody>
+            </table>
+        </div>
+        <br>
+        <br>
+        <br>
+        <form action="{{gift.slug}}/comments" method="POST">
+            <div class="form-group">
+                <h2>Nhận xét</h2>
+                {{#if user}}
+                <textarea class="form-control commentE" name="comment" id="exampleFormControlTextarea1" rows="3"></textarea>
+
+            </div>
+            <button type="submit" class="btn btn-primary disabled">Gửi</button>
+            {{else}}
+            <textarea class="form-control commentE" name="comment" id="exampleFormControlTextarea1" rows="3"
+                placeholder="Bạn cần phải đăng nhập để nhận xét"></textarea>
+    </div>
+    {{/if}}
+    </form>
+    <ul class="comment">
+
+    </ul>
+    {{!-- <h2 class="comment">{{gift.comments.[1].author}}</h2> --}}
+    {{!-- <h2 class="comment">{{gift.comments.[1].comment}}</h2> --}}
+
+    {{#each gift.comments}}
+    <div class="comments">
+    <div>
+        <h5>{{this.author}}</h5>
+        <p>{{this.comment}}</p><br>
+    </div>
+  
+    <div>
+        <a href="" class="btn btn-link" data-id="{{this._id}}" data-toggle="modal" data-target="#deleteItem">Xóa</a>
+    </div>
+ 
+  
+    </div>
+
+
+    {{/each}}
+
+  
+
+
+
+</div>
+</div>
+
+
+{{!-- Alert DELETE ITEM --}}
+<div id="deleteItem" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Xóa vật phẩm</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có đồng ý xóa vật phẩm không?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-danger-delete">Xóa</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- DELETE FORM hiden --}}
+<form name="form-Delete" method="POST"></form>
+<script>
+
+    var myIndex = 0;
+carousel();
+
+function carousel() {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";  
+  }
+  myIndex++;
+  if (myIndex > x.length) {myIndex = 1}    
+  x[myIndex-1].style.display = "block";  
+  setTimeout(carousel, 2000); // Change image every 2 seconds
+}
+
+
+
+
+
+    
+    commentEle = document.querySelector('.commentE')
+    console.log(commentEle)
+    disableBtn = document.querySelector('.disabled')
+    commentEle.onkeyup = function Nhap(){
+      
+        disableBtn.classList.remove("disabled")
+        disableBtn.onclick = function Aleart(e) {
+        
+    }
+        
+    }
+    disableBtn.onclick = function Aleart(e) {
+        e.preventDefault()
+        alert('Bạn cần nhập dữ liệu đánh giá')
+    }
+    
+    
+    
+   
+
+
+    addEventListener('DOMContentLoaded', function () {
+    var btnDelete = document.querySelector('.btn-danger-delete');
+    var formSubmit = document.forms['form-Delete'];
+    var id;
+
+
+    $('#deleteItem').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget);
+      id = button.data('id');
+      console.log(id)
+    })
+
+    btnDelete.onclick = function () {
+      formSubmit.action = ':slug/' + id + '?_method=DELETE';
+      formSubmit.submit();
+    }
+
+  })
+</script>

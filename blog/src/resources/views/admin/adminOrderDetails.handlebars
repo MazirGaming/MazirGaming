@@ -1,0 +1,79 @@
+<div class="mt-4"></div>
+
+<button>
+  
+  <a href="http://localhost:3000/admin/orders">
+  <i class="fa-solid fa-angle-left"></i> Quay lại</a>
+</button>
+<div class="mt-4">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">STT</th>
+        <th scope="col">Tên sản phẩm</th>
+        <th scope="col">Số lượng</th>
+        <th scope="col">Giá</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each data}}
+      {{#each this.items}}
+      <tr>
+        <th scope="row">{{sum @index 1}}</th>
+        <td>{{this.item.name}}</td>
+        <td class="Details2">{{this.qty}}</td>
+        <td>{{this.price}}.000 vnđ</td>
+
+        {{/each}}
+        {{/each}}
+      </tr>
+    </tbody>
+  </table>
+  <form method="POST" action="/admin/orders/{{data._id}}?_method=PUT">
+    <div class="form-group">
+      <h4>Trạng thái đơn hàng hiện tại: {{data.status}}</h4>
+      Chỉnh sửa trạng thái: 
+      <select name="status" id="status" class="status">
+        {{#if (exits data.status)}}
+        <option value="Đã Giao Hàng">
+          Đã giao hàng
+        </option>
+        <option value="Đang Giao Hàng">
+          Đang giao hàng
+        </option>
+        <option value="Đang Xử Lý">
+          Đang xử lý
+        </option>
+        
+        {{/if}}
+        {{#if (load data.status)}}
+        <option value="Đang Xử Lý">
+          Đang xử lý
+        </option>
+        <option value="Đang Giao Hàng">
+          Đang giao hàng
+        </option>
+        <option value="Đã Giao Hàng">
+          Đã giao hàng
+        </option>
+        {{/if}}
+        {{#if (handlex data.status)}}
+        <option value="Đang Giao Hàng">
+          Đang giao hàng
+        </option>
+        <option value="Đang Xử Lý">
+          Đang xử lý
+        </option>
+        <option value="Đã Giao Hàng">
+          Đã giao hàng
+        </option>
+        {{/if}}
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Lưu lại</button>
+  </form>
+</div>
+<script>
+  
+</script>
